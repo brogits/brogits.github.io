@@ -122,7 +122,7 @@
             },
             render_places: function (data, status) {
                 _api.places = [];
-                var tmpl = '{{#loc}}<div class="well well-sm">Name: {{name}}<br/>Address:  {{vicinity}}<br />Rating: {{rating}} <br/></div> <button type="button" class="btn btn-link pull-right" data-toggle="collapse" data-target="#addOrigin"><i class="fa fa-chevron-down"></i> Show Route</button><div class="clearfix"></div>' +
+                var tmpl = '{{#loc}}<div class="well well-sm">Name: {{name}}<br/>Address:  {{vicinity}}<br/>Type: <img width="15" src="{{icon}}" alt=""/> <br/>Rating: {{rating}} <br/></div> <button type="button" class="btn btn-link pull-right" data-toggle="collapse" data-target="#addOrigin"><i class="fa fa-chevron-down"></i> Show Route</button><div class="clearfix"></div>' +
                     '<div class="panel panel-default collapse" id="addOrigin"><div class="panel-body"><div class="form-group"><label class="geo-location"><input type="checkbox" id="chk_{{id}}"/> Use My Location</label><label>Route Origin</label><input id="{{id}}" type="text" class="form-control" placeholder="Enter your Address"/><br><button class="btn btn-default" onclick="_api.events.calc_route(this)" data-vicinity="{{vicinity}}" data-origin-key="{{id}}" ><i class="fa fa-car" ></i></button></div></div></div>{{/loc}}';
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     for (var i = 0, l = data.length; i < l; i++) {
@@ -135,7 +135,7 @@
                         data[i].lat = data[i].geometry.location.lat();
                         data[i].lng = data[i].geometry.location.lng();
                         localdb.store(data[i],key)
-
+                        
                         google.maps.event.addListener(marker, 'click', function (ev) {
                             var key = ev.latLng.lat() + '-' + ev.latLng.lng();
                             var data = localdb.get(key);
